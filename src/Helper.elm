@@ -1,52 +1,49 @@
-module Helper exposing (..)
+module TestSuite exposing (..)
+
+-- GRADE
 
 
-type GradeStatus
+type Grade
     = Approved
     | Failed
-    | Pending
 
 
-categoricalGrade : List Float -> List GradeStatus
-categoricalGrade grades =
-    List.map gradeToStatus grades
-
-
-gradeToStatus : Float -> GradeStatus
-gradeToStatus grade =
-    if grade < 0 then
-        Pending
-
-    else if grade > 7 then
+categoricalGrade : Int -> Grade
+categoricalGrade grade =
+    if grade >= 7 then
         Approved
 
     else
         Failed
 
 
-type AirplaneStatus
-    = OnTime
-    | Boarding
+
+-- AIRPLANE
+
+
+type AirplaneSchedule
+    = Cancelled
     | Delayed
-    | Cancelled
+    | OnTime
+    | Boarding
 
 
-airplaneScheduleAction : AirplaneStatus -> String
-airplaneScheduleAction status =
-    case status of
-        OnTime ->
-            "Flight is on time"
-
-        Boarding ->
-            "Passengers are boarding"
+airplaneScheduleAction : AirplaneSchedule -> String
+airplaneScheduleAction schedule =
+    case schedule of
+        Cancelled ->
+            "Pedir reembolso"
 
         Delayed ->
-            "Flight is delayed"
+            "Esperar"
 
-        Cancelled ->
-            "Flight is cancelled"
+        OnTime ->
+            "Esperar"
+
+        Boarding ->
+            "Buscar boleto"
 
 
-airportAction : List AirplaneStatus -> List String
-airportAction statuses =
-    List.map airplaneScheduleAction statuses
+airplaneAction : List AirplaneSchedule -> List String
+airplaneAction schedules =
+    List.map airplaneScheduleAction schedules
