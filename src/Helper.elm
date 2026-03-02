@@ -1,36 +1,32 @@
 module Helper exposing (..)
 
--- GRADE
-
-
-type Grade
+type GradeStatus
     = Approved
     | Failed
+    | Pending
 
+categoricalGrade : List Float -> List GradeStatus
+categoricalGrade grades =
+    List.map
+        (\grade ->
+            if grade < 0 then
+                Pending
+            else if grade >= 7 then
+                Approved
+            else
+                Failed
+        )
+        grades
 
-categoricalGrade : Int -> Grade
-categoricalGrade grade =
-    if grade >= 7 then
-        Approved
-
-    else
-        Failed
-
-
-
--- AIRPLANE
-
-
-type AirplaneSchedule
-    = Cancelled
-    | Delayed
-    | OnTime
+type AirplaneStatus
+    = OnTime
     | Boarding
+    | Delayed
+    | Cancelled
 
-
-airplaneScheduleAction : AirplaneSchedule -> String
-airplaneScheduleAction schedule =
-    case schedule of
+airplaneScheduleAction : AirplaneStatus -> String
+airplaneScheduleAction status =
+    case status of
         Cancelled ->
             "Pedir reembolso"
 
@@ -43,7 +39,6 @@ airplaneScheduleAction schedule =
         Boarding ->
             "Buscar boleto"
 
-
-airplaneAction : List AirplaneSchedule -> List String
-airplaneAction schedules =
-    List.map airplaneScheduleAction schedules
+airportAction : List AirplaneStatus -> List String
+airportAction statuses =
+    List.map airplaneScheduleAction statuses
