@@ -1,9 +1,11 @@
 module Helper exposing (..)
 
+
 type GradeStatus
     = Approved
     | Failed
     | Pending
+
 
 categoricalGrade : List Float -> List GradeStatus
 categoricalGrade grades =
@@ -11,18 +13,22 @@ categoricalGrade grades =
         (\grade ->
             if grade < 0 then
                 Pending
+
             else if grade >= 7 then
                 Approved
+
             else
                 Failed
         )
         grades
+
 
 type AirplaneStatus
     = OnTime
     | Boarding
     | Delayed
     | Cancelled
+
 
 airplaneScheduleAction : AirplaneStatus -> String
 airplaneScheduleAction status =
@@ -38,6 +44,7 @@ airplaneScheduleAction status =
 
         Boarding ->
             "Buscar boleto"
+
 
 airportAction : List AirplaneStatus -> List String
 airportAction statuses =
