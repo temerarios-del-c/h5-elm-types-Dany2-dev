@@ -1,4 +1,4 @@
-module TestSuite exposing (..)
+module Helper exposing (..)
 
 -- GRADE
 
